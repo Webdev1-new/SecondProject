@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+$('#logininput').on('click',function(){
+	var $username= $('#username');	
+	var $password= $('#password');
+	
+var res1= {
+			username: $username.val(),
+			password: $password.val(),
+				
+		  }; 
+var rest1 = JSON.stringify(res1);
+$.ajax({
+	type:'post',
+	contentType: 'application/json',
+    url : '/validate',
+    data: rest1,
+    cache: false,
+    success: function(data)		
+	{
+        var ted= JSON.stringify(data);
+    	$('#message').html(ted);
+    	/*alert(data);*/
+    	
+	},	
+	error:	function(data)	
+	{
+		
+		 var ted1= JSON.stringify(data);
+	    	$('#message').html(ted1);
+    
+	}
+		
+	});
+});	
+	});
+
+</script>
+</head>
+<body>
+<div id="login">
+<table>
+<tr>
+<td><label for="username">username</label>
+<td><input type="text" name="userid" id="username"></td>
+</tr>
+<tr>
+<td><label for="password">Password</label>
+<td><input type="password" name="security" id="password"></td>
+</tr>
+<tr>
+<td><button id="logininput">Login</button></td>
+</tr>
+</table>
+
+<div id="message"></div>
+</div>
+</body>
+</html>
